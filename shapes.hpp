@@ -22,8 +22,6 @@ void DrawCircle(SDL_Renderer * renderer, int32_t centreX, int32_t centreY, int32
       SDL_RenderDrawPoint(renderer, centreX - y, centreY - x);
       SDL_RenderDrawPoint(renderer, centreX - y, centreY + x);
 
-      SDL_SetRenderDrawColor(renderer, 0, 0, 0, 255); // Change color back
-
       if (error <= 0)
       {
          ++y;

@@ -44,6 +44,8 @@ void GameLoop(SDL_Window *window, SDL_Renderer *renderer)
                 break;
         }
 
+        SDL_SetRenderDrawColor(renderer, 95, 0, 255, 255);
+
         SDL_RenderClear(renderer);
 
         DrawCircle(renderer, x, y, 5);
@@ -60,6 +62,7 @@ int main(int argc, char* argv[])
     SDL_Renderer *renderer = nullptr;
     //Ask the WM to not composite the window which fixes visual bugs in some WMs
     SDL_SetHint(SDL_HINT_VIDEO_X11_NET_WM_BYPASS_COMPOSITOR, "0");
+    SDL_SetRenderDrawBlendMode(renderer, SDL_BLENDMODE_BLEND);
 
      //Create an application window with the following settings:
     window = SDL_CreateWindow(
@@ -79,8 +82,6 @@ int main(int argc, char* argv[])
         cout << "Could not create window: %s\n" << SDL_GetError();
         return -1;
     }
-
-    SDL_SetRenderDrawColor(renderer, 0, 0, 0, 255);
 
     SDL_UpdateWindowSurface(window);
 
