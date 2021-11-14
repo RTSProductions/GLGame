@@ -8,18 +8,45 @@ using namespace std;
 
 void GameLoop(SDL_Window *window, SDL_Renderer *renderer)
 {
+    float x = SCREEN_WIDTH / 2;
+    float y = SCREEN_HEIGHT / 2;
+    float speed = 0.1f;
+
     SDL_Event e;
+
+    Uint64 NOW = SDL_GetPerformanceCounter();
+    Uint64 LAST = 0;
+    double deltaTime = 0;
 
     while (true)
     {
-        SDL_PollEvent(&e);
 
-        if (e.type == SDL_QUIT)
-            return;
+         LAST = NOW;
+         NOW = SDL_GetPerformanceCounter();
+
+        deltaTime = (double)((NOW - LAST)*1000 / (double)SDL_GetPerformanceFrequency());
+        SDL_PollEvent(&e);
+        float speedf = speed * deltaTime;
+
+        switch (e.type)
+        {
+            case SDL_KEYDOWN:
+                switch (e.key.keysym.sym)
+                {
+                    case SDLK_LEFT:  x -= speedf; break;
+                    case SDLK_RIGHT: x += speedf; break;
+                    case SDLK_UP:    y -= speedf; break;
+                    case SDLK_DOWN:  y += speedf; break;
+                }
+                break;
+            case SDL_QUIT:
+                return;
+                break;
+        }
 
         SDL_RenderClear(renderer);
 
-        DrawCircle(renderer, SCREEN_WIDTH / 2, SCREEN_HEIGHT / 2, 100);
+        DrawCircle(renderer, x, y, 5);
 
         SDL_RenderPresent(renderer);
     }
