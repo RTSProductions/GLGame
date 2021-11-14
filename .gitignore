@@ -31,6 +31,9 @@
 *.out
 *.app
 *.exec
+Game
+Program
+Builds/
 
 # Extra
 .DS_Store
