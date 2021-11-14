@@ -1,2 +1,2 @@
-# GLGame
+# Game
 A Game
